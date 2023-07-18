@@ -1,0 +1,5 @@
+.MobileSizeDiv {
+  width: 100vw;
+  max-width: 450px;
+  position: relative;
+}

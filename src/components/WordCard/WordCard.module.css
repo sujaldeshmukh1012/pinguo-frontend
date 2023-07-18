@@ -1,0 +1,119 @@
+.WordCard {
+  border-radius: 30px;
+  /* height: 85vh; */
+  width: 100%;
+  margin-bottom: 5em;
+  margin-top: 5em;
+  background-color: #fff;
+  padding: 1em;
+  font-family: "Open Sans", sans-serif;
+}
+
+.LevelIndicator {
+  width: 100%;
+  text-align: right;
+  background-color: inherit;
+  color: grey;
+}
+.WordMeaning {
+  margin: 0;
+  margin-top: 1em;
+  font-size: 30px;
+  font-weight: bolder;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  background-color: inherit;
+}
+.WordSubtitle {
+  background-color: inherit;
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+  font-weight: lighter;
+  color: rgb(95, 95, 95);
+  margin-top: 0.5em;
+}
+.IdeoGramsWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  margin-top: 1.5em;
+}
+.IdeoGramsWrapperLower {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  margin-top: 0.5em;
+}
+.IdeoGrams {
+  width: 1.5em;
+  /* height: 5em; */
+  aspect-ratio: 1/1;
+  background-color: #f3f3f3;
+  color: #000;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 80px;
+  margin: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.Paragraph {
+  background-color: inherit;
+}
+.Pronounciations {
+  width: 4em;
+  height: 2em;
+  background-color: #f3f3f3;
+  color: #000;
+  font-size: 30px;
+  border-radius: 5px;
+  margin: 0.1em;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  justify-content: center;
+}
+.WordCardDescription {
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: inherit;
+  padding: 1em;
+}
+.WordCardDescriptionParagraph {
+  background-color: inherit;
+  width: 90%;
+  line-height: 1.7em;
+  text-align: justify;
+  color: #555555;
+}
+.WordCardLearnMoreBtnWrapper {
+  margin-top: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: inherit;
+  padding: 1em;
+}
+.WordCardLearnMoreBtn {
+  padding: 0.5em 2em;
+  font-size: 16px;
+  border-radius: 100px;
+  font-weight: bold;
+  color: #fff;
+  background: #d2d2d2;
+  border: none;
+}

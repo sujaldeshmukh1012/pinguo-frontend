@@ -1,0 +1,131 @@
+.BottomSelect {
+  width: 100%;
+  height: 3.5em;
+  background-color: black;
+  position: absolute;
+  z-index: 998;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.BottomSelectButton {
+  font-size: 1.5em;
+  background-color: transparent;
+  padding: 0.5em 0.7em;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.BottomSelectButtonIcon {
+  background-color: inherit;
+  /* transition: 0.3s ease-in-out; */
+  font-size: 20px;
+  color: #fff;
+}
+.ModalClass {
+  z-index: 999;
+  width: 100%;
+  max-width: 450px;
+  position: absolute;
+  bottom: 0;
+  background: yellow;
+  height: 50vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.ModalClassCard {
+  background-color: aqua;
+}
+.MainModalWrapper {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #00000000;
+  height: calc(100vh - 3.5em);
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+}
+.QuitModalOverlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 998;
+  background-color: #00000023;
+  cursor: pointer;
+}
+.InnerDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  z-index: 998;
+  position: absolute;
+  bottom: 0;
+  max-height: 70vh;
+  height: fit-content;
+  background-color: #fff;
+
+  padding: 1em 0em 0 0;
+  overflow: scroll;
+  /* transition: 0.3s ease-in-out; */
+}
+.InnerDiv::-webkit-scrollbar {
+  display: none;
+}
+.ModalOptionButton {
+  width: 100%;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0em;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.331);
+  background-color: transparent;
+  font-size: 20px;
+  margin-bottom: 0em;
+  cursor: pointer;
+  position: relative;
+  /* transition: 0.3s ease-in-out; */
+}
+
+.MOBImage {
+  position: absolute;
+  left: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: transparent;
+}
+
+.ModalOptionTitle {
+  font-size: 1em;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+}
+.BSBBackButton {
+  position: absolute;
+  left: 1em;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 100px;
+  cursor: pointer;
+  /* transition: 0.3s ease-in-out; */
+}
+.BSBBackButton:hover {
+  /* transform: scale(0.95); */
+
+  /* transition: 0.3s ease-in-out; */
+}

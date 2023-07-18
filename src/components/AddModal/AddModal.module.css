@@ -1,0 +1,99 @@
+.AddModalWrapper {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #00000000;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+}
+.QuitModalOverlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 9999;
+  background-color: #00000059;
+  cursor: pointer;
+}
+.InnerDiv {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  z-index: 99999;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  height: fit-content;
+  background-color: #fff;
+  padding: 1em 0.5em;
+  padding-left: 1em;
+  overflow: scroll;
+  padding-bottom: 3em;
+}
+.InnerDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.IDCrossButton {
+  font-size: 1.5em;
+  border-radius: 100px;
+  border: none;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  cursor: pointer;
+  background: #fff;
+  /* transition: 0.3s ease-in-out; */
+}
+
+.IDCrossButtonIcons {
+  background-color: inherit;
+}
+.ID_h2 {
+  margin-top: 1rem;
+  background-color: inherit;
+  font-size: 20px;
+}
+.IDForm {
+  width: 100%;
+  height: auto;
+  background: #00000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 1em;
+}
+.IDInputField {
+  width: 100%;
+  font-family: inherit;
+  padding: 1em;
+  font-size: 25px;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  border: 1px solid grey;
+  background-color: transparent;
+  height: 4em;
+}
+.IDSubmitButton {
+  width: 50%;
+  /* height: 2em; */
+  padding: 1em;
+  font-size: 15px;
+  border: 1px solid #005bff;
+  background: #005bff;
+  color: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  /* transition: 0.3s ease-in-out; */
+}
+.IDSubmitButton:hover {
+  /*   transform: scale(0.9); */
+  /* transition: 0.3s ease-in-out; */
+}

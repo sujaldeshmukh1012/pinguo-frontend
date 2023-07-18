@@ -1,0 +1,50 @@
+.NavBar {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 3em;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.NavHeading {
+  background-color: inherit;
+  font-size: 1.4em;
+  text-align: center;
+  width: 50%;
+  max-width: 400px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.BackToHomeBtn {
+  position: absolute;
+  left: 1em;
+  font-size: 25px;
+  color: #000;
+  background: #fff;
+  /* transition: 0.3s ease-in-out; */
+  text-decoration: none;
+}
+.ImageIndicator {
+  width: 1em;
+  height: 100%;
+  object-fit: contain;
+  background-color: #fff;
+}
+
+.BackToHomeBtnIcon {
+  background-color: #fff;
+}
+.BackToHomeBtn:hover {
+  /* transform: scale(0.95); */
+
+  /* transition: 0.3s ease-in-out; */
+
+  color: grey;
+}

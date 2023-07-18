@@ -1,0 +1,52 @@
+.HomePage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 99;
+}
+.LoadingIndicator {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+}
+.LoaderSpinner {
+  background-color: inherit;
+}
+.ErrorHandler {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ErrorHandlerH3 {
+  color: rgb(255, 57, 57);
+}
+.ErrorHandlerPara {
+  font-size: 15px;
+}
+.ErrorHandlerTryAgainBtn {
+  width: 7em;
+  border: none;
+  background-color: black;
+  color: #fff;
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 100px;
+  font-weight: bolder;
+  cursor: pointer;
+  /* transition: 0.3s ease-in-out; */
+}
+.ErrorHandlerTryAgainBtn:hover {
+  /* transform: scale(0.95); */
+
+  /* transition: 0.3s ease-in-out; */
+}
