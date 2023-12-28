@@ -10,8 +10,10 @@ import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { ExtractLocalDetails } from "../HomePage/HomePage";
 import { BASEURL } from "../../connections/BASEURL";
+import course from "../../assets/icons/svg/course.svg";
 
 import { FetchCoursesOrLesson } from "../../connections/MainFetch";
+import PageArrangement from "../../connections/PageArrangement";
 function CoursePage() {
   const [AddModalOpen, setAddModalOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ function CoursePage() {
     var url = BASEURL + "courses/" + courseId;
     const resp = await fetch(url, {
       headers: { Authorization: "Bearer " + token },
+      // referrerPolicy: "unsafe-url",
     });
     const isSuccess = resp.ok;
     const RespData = await resp.json();
@@ -66,6 +69,11 @@ function CoursePage() {
     const response = await FetchCoursesOrLesson(token, url);
     if (response.status) {
       SetLessonList(response.data);
+      PageArrangement(
+        "change-lesson-arrangement/" + courseId + "/",
+        token,
+        response.data
+      );
       setLoading(false);
       setError(false);
     } else {
@@ -83,6 +91,7 @@ function CoursePage() {
         Authorization: "Bearer " + AccessToken,
         "Content-Type": "application/json",
       },
+      // referrerPolicy: "unsafe-url",
       body: JSON.stringify({
         title: title,
         author: UserId,
@@ -98,7 +107,7 @@ function CoursePage() {
   };
   return (
     <div className={stx.CoursePage}>
-      <NavBar title={Title} />
+      <NavBar title={Title} icon={course} />
       <MobileSizeDiv>
         <CourseContent
           LessonList={LessonList}
@@ -111,6 +120,7 @@ function CoursePage() {
         />
         <BottomSelect
           AfterSuccessFunction={FetchLessons}
+          allowedActions={["Lesson"]}
           ActionType={1}
           AccessToken={AccessToken}
           UserId={UserId}

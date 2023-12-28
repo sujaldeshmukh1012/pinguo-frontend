@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   z-index: 99;
+  overflow: hidden;
 }
 .WordCardWrapper {
   width: 100%;

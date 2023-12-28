@@ -4,6 +4,7 @@ import MobileSizeDiv from "../../components/MobileSizeDiv/MobileSizeDiv";
 import stx from "./LoginPage.module.css";
 import { LoadingIndicator } from "../HomePage/HomePage";
 import { BASEURL } from "../../connections/BASEURL";
+import Checkbox from "rc-checkbox";
 
 function LoginPage() {
   return (
@@ -29,7 +30,7 @@ const LoginContent = () => {
     setUsername(e.target.value);
   };
   const HandelShowHidePass = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     SetShowPass(!ShowPass);
   };
   const HandelPasswordChange = (e) => {
@@ -56,7 +57,7 @@ const LoginContent = () => {
       const isSuccessful = response.ok;
       if (isSuccessful) {
         const data = await response.json();
-        var successSavingToken = SaveToken(data);
+        var successSavingToken = await SaveToken(data);
         if (successSavingToken) {
           SetLoading(false);
           SetSuccess(true);
@@ -108,13 +109,14 @@ const LoginContent = () => {
             />
             <div className={stx.OtherOptionDiv}>
               <div className={stx.OtherOptionDivCheck}>
-                <input
+                {/* <input
                   type="checkbox"
                   name="checkbox"
-                  value={ShowPass}
+                  // value={ShowPass}
                   onChange={(e) => HandelShowHidePass(e)}
                   className={stx.CheckboxShowPass}
-                />
+                /> */}
+                <Checkbox onChange={(e) => HandelShowHidePass(e)} />
                 <p className={stx.otherText}>Show Password</p>
               </div>
               <p className={stx.otherTextSpecial}>Forgotten Password?</p>
@@ -136,25 +138,28 @@ const LoginContent = () => {
 
 const SaveToken = async (data) => {
   var url = BASEURL + "get-user-id";
-  try {
-    var refreshToken = data["refresh"];
-    var accessToken = data["access"];
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
-    });
-    const respData = await response.json();
-    var UserId = respData["id"];
-    var UserName = respData["username"];
-    localStorage.setItem("userId", UserId);
-    localStorage.setItem("userName", UserName);
-    localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem("accessToken", accessToken);
+  var refreshToken = data["refresh"];
+  var accessToken = data["access"];
+  console.log(accessToken);
+  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("refreshToken", refreshToken);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
+  const respData = await response.json();
+  var UserId = respData["id"];
+  var UserName = respData["username"];
+  localStorage.setItem("userId", UserId);
+  localStorage.setItem("userName", UserName);
+  var acc_tok = localStorage.getItem("accessToken");
+  if (acc_tok) {
     return true;
-  } catch (error) {
-    alert(error);
+  } else {
     return false;
   }
 };
+
+// try gettng tokeb after setting it, if not nullthen show true else false

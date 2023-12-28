@@ -1,0 +1,78 @@
+.IDCrossButton {
+  position: absolute;
+  top: 5;
+  right: 0;
+  background-color: #fff;
+  border: none;
+  padding: 0.5em 0.7em;
+  border-radius: 100px;
+}
+.MianWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: inherit;
+}
+.IDCrossButtonIcons {
+  background-color: inherit;
+  color: #000;
+  font-size: 20px;
+}
+.ContentDiv {
+  margin-top: 3em;
+  background-color: inherit;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.ChooseWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 5em;
+  background-color: inherit;
+}
+.InfoPic {
+  height: 4em;
+  height: 4em;
+  border-radius: 100px;
+}
+.InfoChooseInner {
+  width: 100%;
+  padding: 0.5em;
+  background-color: inherit;
+}
+.InfoChooseH3 {
+  font-weight: normal;
+  margin-bottom: 0.3em;
+  font-size: 15px;
+  background-color: inherit;
+  color: darkgrey;
+}
+.InfoChooseSelect {
+  width: 100%;
+  padding: 0.5em;
+  border: 2px solid #b0b0b0;
+  background-color: inherit;
+  border-radius: 5px;
+}
+.InfoChooseSelectGrey {
+  width: 100%;
+  padding: 0.5em;
+  border: 2px solid #b0b0b0;
+  background-color: rgb(168, 168, 168);
+  border-radius: 5px;
+}
+.IDSubmitButton {
+  width: 50%;
+  /* height: 2em; */
+  padding: 1em;
+  font-size: 15px;
+  border: 1px solid #005bff;
+  background: #005bff;
+  color: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  /* transition: 0.3s ease-in-out; */
+}

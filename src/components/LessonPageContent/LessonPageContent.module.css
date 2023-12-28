@@ -30,3 +30,31 @@
   background-color: transparent;
   margin-bottom: 1em;
 }
+.TopSelect {
+  width: 100%;
+  padding-left: 1.5em;
+  margin-right: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  justify-content: flex-start;
+}
+.TopSelectButtonSelected {
+  padding: 0.5em 0.7em;
+  border-radius: 100px;
+  border: 2px solid grey;
+  cursor: pointer;
+  margin-left: 1em;
+  color: #000;
+}
+.TopSelectButton {
+  padding: 0.5em 0.7em;
+  border-radius: 100px;
+  border: 2px solid grey;
+  margin-left: 1em;
+  color: #000;
+  cursor: pointer;
+}

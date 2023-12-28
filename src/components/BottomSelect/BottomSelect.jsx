@@ -8,6 +8,7 @@ import book from "../../assets/icons/svg/course.svg";
 import lesson from "../../assets/icons/svg/lesson.svg";
 import dialogue from "../../assets/icons/svg/dialogue.svg";
 import dialogue_group from "../../assets/icons/svg/dialogueGroup.svg";
+import labelImg from "../../assets/icons/label.png";
 import balloon from "../../assets/icons/svg/balloon.svg";
 import word_card from "../../assets/icons/svg/wordCard.svg";
 import note from "../../assets/icons/svg/note.svg";
@@ -18,10 +19,16 @@ function BottomSelect({
   toggleAddModal,
   home,
   AccessToken,
+  allowedActions,
   UserId,
   AfterSuccessFunction,
   Parent_Course,
   Parent_Lesson,
+  Parent_DialogueGroup,
+  Parent_Dialogue,
+  TestCardId,
+  Parent_Dialogue_data,
+  TestCardPage,
 }) {
   const [AddModalOpen, setAddModalOpen] = useState(false);
   const [ModalTitle, setModalTitle] = useState("Course Title");
@@ -50,6 +57,21 @@ function BottomSelect({
       case 5:
         setModalTitle("Edit Word Card Title");
         break;
+      case 6:
+        setModalTitle("Dialogue Group Title");
+        break;
+      case 7:
+        setModalTitle("Edit Dialogue Group Title");
+        break;
+      case 8:
+        setModalTitle("Dialogue Title");
+        break;
+      case 9:
+        setModalTitle("Edit Dialogue Title");
+        break;
+      case 100:
+        setModalTitle("Create Wrong Answer");
+        break;
       default:
         setModalTitle("Title");
     }
@@ -58,6 +80,7 @@ function BottomSelect({
   const options = [
     {
       id: 0,
+      visible: allowedActions?.includes("Course"),
       title: "Course",
       image: book,
       func: () => ToggleAddModal(0),
@@ -66,49 +89,64 @@ function BottomSelect({
       id: 1,
       title: "Lesson",
       image: lesson,
+      visible: allowedActions?.includes("Lesson"),
       func: () => ToggleAddModal(2),
     },
     {
       id: 2,
       title: "Dialogue group",
       image: dialogue_group,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Dialogue group"),
+      func: () => ToggleAddModal(6),
     },
     {
       id: 3,
       title: "Dialogue",
       image: dialogue,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Dialogue"),
+      func: () => ToggleAddModal(8),
     },
     {
       id: 4,
       title: "Image",
       image: image,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Image"),
+      func: () => ToggleAddModal(10),
     },
     {
       id: 5,
       title: "Ballon",
       image: balloon,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Ballon"),
+      func: () => ToggleAddModal(12),
     },
     {
       id: 6,
       title: "Word Card",
       image: word_card,
+      visible: allowedActions?.includes("Word Card"),
       func: () => ToggleAddModal(4),
     },
     {
       id: 7,
       title: "Pop Up",
       image: pop_up,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Pop Up"),
+      func: () => ToggleAddModal(14),
     },
     {
       id: 8,
       title: "Note",
       image: note,
-      func: () => console.log(""),
+      visible: allowedActions?.includes("Note"),
+      func: () => ToggleAddModal(13),
+    },
+    {
+      id: 9,
+      title: "Label",
+      image: labelImg,
+      visible: allowedActions?.includes("Label"),
+      func: () => ToggleAddModal(15),
     },
   ];
   return (
@@ -129,7 +167,9 @@ function BottomSelect({
         )}
         <button
           className={stx.BottomSelectButton}
-          onClick={() => setOpen(!isOpen)}
+          onClick={() => {
+            TestCardPage ? ToggleAddModal(100) : setOpen(!isOpen);
+          }}
         >
           <FontAwesomeIcon
             style={{
@@ -143,17 +183,19 @@ function BottomSelect({
       {isOpen && (
         <MainModal toggleAddModal={toggleAddModal} setOpen={setOpen}>
           {options?.map((item, i) => {
-            return (
-              <OptionChip
-                title={item?.title}
-                image={item?.image}
-                id={item?.id}
-                onChipPress={() => {
-                  item.func();
-                  setOpen(false);
-                }}
-              />
-            );
+            if (item.visible) {
+              return (
+                <OptionChip
+                  title={item?.title}
+                  image={item?.image}
+                  id={item?.id}
+                  onChipPress={() => {
+                    item.func();
+                    setOpen(false);
+                  }}
+                />
+              );
+            }
           })}
         </MainModal>
       )}
@@ -165,8 +207,12 @@ function BottomSelect({
           UserId={UserId}
           title={ModalTitle}
           Parent_Course={Parent_Course}
+          Parent_DialogueGroup={Parent_DialogueGroup}
+          Parent_Dialogue={Parent_Dialogue}
+          Parent_Dialogue_data={Parent_Dialogue_data}
           Parent_Lesson={Parent_Lesson}
           AfterSuccessFunction={AfterSuccessFunction}
+          TestCardId={TestCardId}
           data={null}
         />
       )}

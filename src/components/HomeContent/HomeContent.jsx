@@ -57,13 +57,14 @@ function HomeContent({
 
   const OnActionSubmitForDuplicate = async () => {
     SetDuplicationError(false);
-    var url = BASEURL + "course-actions/" + 0 + "/";
+    var url = BASEURL + "course-actions-duplicate/" + SelectedCourse.id + "/";
     const resp = await fetch(url, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + AccessToken,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json",SelectedCourse
       },
+      // referrerPolicy: "unsafe-url",
       body: JSON.stringify({
         title: SelectedCourse.title,
         author: UserId,
@@ -90,6 +91,7 @@ function HomeContent({
         Authorization: "Bearer " + AccessToken,
         "Content-Type": "application/json",
       },
+      // referrerPolicy: "unsafe-url",
     });
     AfterSuccessFunction(AccessToken);
     setDeleteModal(false);
@@ -276,6 +278,7 @@ export const UpdateIndexInTheBackend = async (array, AccessToken, url) => {
         Authorization: "Bearer " + AccessToken,
         "Content-Type": "application/json",
       },
+      // referrerPolicy: "unsafe-url",
       body: JSON.stringify({
         list: indexArray,
       }),

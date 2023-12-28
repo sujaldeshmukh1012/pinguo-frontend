@@ -1,6 +1,6 @@
 .AddModalWrapper {
-  width: 100%;
-  position: absolute;
+  width: 450px;
+  position: fixed;
   top: 0;
   bottom: 0;
   background-color: #00000000;
@@ -8,21 +8,24 @@
   z-index: 99999;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 .QuitModalOverlay {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: absolute;
   z-index: 9999;
   background-color: #00000059;
   cursor: pointer;
+  right: 0;
+  left: 0;
 }
 .InnerDiv {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  width: 100%;
+  width: 450px;
   z-index: 99999;
   position: absolute;
   left: 0;
@@ -74,7 +77,7 @@
   width: 100%;
   font-family: inherit;
   padding: 1em;
-  font-size: 25px;
+  font-size: 15px;
   margin-bottom: 1em;
   border-radius: 10px;
   border: 1px solid grey;
@@ -96,4 +99,226 @@
 .IDSubmitButton:hover {
   /*   transform: scale(0.9); */
   /* transition: 0.3s ease-in-out; */
+}
+
+.ImageUploadFeature {
+  width: 100%;
+  height: 100%;
+  background: #ebebeb00;
+  padding-top: 2em;
+}
+.ImgUplH2 {
+  background-color: inherit;
+  font-size: 15px;
+  font-weight: normal;
+  margin-bottom: 0.3em;
+}
+.ImgUplInputs {
+  width: 95%;
+  padding: 0.5em;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  background-color: #fff;
+}
+.ImgUplInputsMuted {
+  width: 95%;
+  padding: 0.1em 0.5em;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #c9c9c9;
+  background-color: #c9c9c9;
+}
+.ButtonsDivision {
+  background-color: inherit;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imageavatar {
+  margin-top: 1em;
+  background-color: inherit;
+  margin-bottom: 1em;
+  width: 100%;
+  height: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ImgUplImage {
+  width: 8em;
+  height: 8em;
+  border-radius: 1000px;
+  object-fit: contain;
+  background-color: inherit;
+}
+.ButtonsUplaod {
+  padding: 1.7em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  border: 1px solid #005bff;
+  background: #005bff;
+  border-radius: 10px;
+  height: 3em;
+  width: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ButtonsUplaodLabel {
+  padding: 1.5em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  border: 1px solid #005bff;
+  background: #005bff;
+  border-radius: 10px;
+  height: 3em;
+  width: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UplaodButtons {
+  background-color: inherit;
+  width: 3em;
+  height: 3em;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.ButtonsUplaodInput {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.SubmitBtnWrapper {
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 0em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+}
+.BalloonUploadFeature {
+  width: 100%;
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #fff;
+}
+.ChooseWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 5em;
+  background-color: inherit;
+}
+.AvatarPic {
+  height: 4em;
+  height: 4em;
+  border-radius: 100px;
+}
+.AvatarChooseInner {
+  width: 100%;
+  padding: 0.5em;
+  background-color: inherit;
+}
+.AvatarChooseH3 {
+  font-weight: normal;
+  margin-bottom: 0.3em;
+  font-size: 15px;
+  background-color: inherit;
+  color: darkgrey;
+}
+.AvatarChooseSelect {
+  width: 100%;
+  padding: 0.5em;
+  border: 2px solid #b0b0b0;
+  background-color: inherit;
+  border-radius: 5px;
+}
+.VoicePic {
+  height: 3em;
+  height: 3em;
+  border-radius: 100px;
+  margin-right: 1em;
+}
+.AudioUpload {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.VoiceLabel {
+  border-radius: 100px;
+  background-color: inherit;
+  width: 3em;
+  height: 3em;
+}
+.labelPic {
+  width: 100%;
+  height: 100%;
+}
+.AvatarChooseSelectMuted {
+  width: 100%;
+  padding: 0.5em;
+  border: 2px solid #dfdfdf;
+  border-radius: 5px;
+  background: #d7d7d7;
+}
+.BaloonMeaningH3 {
+  background: inherit;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: normal;
+  font-size: 17px;
+}
+.BaloonTextArea {
+  background: inherit;
+  width: 100%;
+  border: 2px solid #b0b0b0;
+  border-radius: 10px;
+  height: 5em;
+  font-size: 20px;
+  padding: 0.5em;
+}
+.BaloonTextAreaPopup {
+  background: inherit;
+  width: 100%;
+  border: 2px solid #b0b0b0;
+  border-radius: 10px;
+  height: 7em;
+  font-size: 20px;
+  padding: 0.5em;
+}
+.BaloonInputArea {
+  background: inherit;
+  width: 100%;
+  border: 2px solid #b0b0b0;
+  border-radius: 10px;
+  height: 3em;
+  font-size: 20px;
+  padding: 0.5em;
+}
+.ImageUplaodWrapper {
+  width: 100%;
+  background-color: inherit;
+}
+.ImageUploadImagePreview {
+  width: 100%;
+  height: 9em;
+  border-radius: 10px;
+  background-color: rgb(205, 205, 205);
+}
+.PreviewImage {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: inherit;
+  object-fit: contain;
+  background-color: #fff;
 }

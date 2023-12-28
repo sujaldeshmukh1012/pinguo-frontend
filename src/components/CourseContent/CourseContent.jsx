@@ -11,16 +11,24 @@ import {
   faPen,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import testCard from "../../assets/icons/test-card.png";
 import { MainModal } from "../BottomSelect/BottomSelect";
 import AddModal, { ElevatedModal } from "../AddModal/AddModal";
 import { ErrorHandler, LoadingIndicator } from "../../pages/HomePage/HomePage";
 import { BASEURL } from "../../connections/BASEURL";
+import label_word_card from "../../assets/icons/label_word_card.png";
 import {
   CourseDeleteMatter,
   UpdateIndexInTheBackend,
 } from "../HomeContent/HomeContent";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import lessonImg from "../../assets/icons/svg/lesson.svg";
+import popupImg from "../../assets/icons/svg/popUp.svg";
+import cross_cancel from "../../assets/icons/cross_cancel.png";
+import NoteImg from "../../assets/icons/svg/note.svg";
+import labelImg from "../../assets/icons/label.png";
+import PageArrangement from "../../connections/PageArrangement";
+
 function CourseContent({
   LessonList,
   loading,
@@ -61,6 +69,7 @@ function CourseContent({
     var url = BASEURL + "lessons-actions/" + 0 + "/";
     const resp = await fetch(url, {
       method: "POST",
+      // referrerPolicy: "unsafe-url",
       headers: {
         Authorization: "Bearer " + AccessToken,
         "Content-Type": "application/json",
@@ -88,6 +97,7 @@ function CourseContent({
     var url = BASEURL + "lessons-actions/" + SelectedCourse.id + "/";
     const resp = await fetch(url, {
       method: "DELETE",
+      // referrerPolicy: "unsafe-url",
       headers: {
         Authorization: "Bearer " + AccessToken,
         "Content-Type": "application/json",
@@ -103,6 +113,11 @@ function CourseContent({
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     SetUpdatedList(items);
+    PageArrangement(
+      "change-lesson-arrangement/" + Parent_Course + "/",
+      AccessToken,
+      items
+    );
     var url = BASEURL + "update/lesson/";
     UpdateIndexInTheBackend(items, AccessToken, url);
   };
@@ -140,6 +155,7 @@ function CourseContent({
                           className={stx.ListLi}
                         >
                           <CourseChip
+                            Parent_Course={Parent_Course}
                             ToggleModal={ToggleModal}
                             data={item}
                             key={index}
@@ -193,14 +209,11 @@ function CourseContent({
 
 export default CourseContent;
 
-const CourseChip = ({ ToggleModal, data }) => {
+const CourseChip = ({ ToggleModal, data, Parent_Course }) => {
   return (
     <div className={stx.CourseChip}>
       <img src={lessonImg} className={stx.CourseChipImage} />
-      <a
-        href={data?.parent_course + "/lesson/" + data?.id}
-        className={stx.CCTitle}
-      >
+      <a href={Parent_Course + "/lesson/" + data?.id} className={stx.CCTitle}>
         {data?.title}
       </a>
       <button className={stx.CCButton} onClick={() => ToggleModal(data)}>
@@ -216,10 +229,40 @@ export const ContentChip = ({
   url,
   children,
   iconImage,
+  IconStyles,
+  note_linked,
+  popup_linked,
+  label_linked,
+  empty,
 }) => {
   return (
-    <div className={stx.CourseChip}>
-      <img src={iconImage.toString()} className={stx.CourseChipImage} />
+    <div className={empty ? stx.CourseChipEmpty : stx.CourseChip}>
+      <img
+        src={iconImage.toString()}
+        className={stx.CourseChipImage}
+        style={IconStyles}
+      />
+      {label_linked && (
+        <img
+          src={label_word_card.toString()}
+          className={stx.CourseChipImage}
+          style={IconStyles}
+        />
+      )}
+      {note_linked && (
+        <img
+          src={NoteImg.toString()}
+          className={stx.CourseChipImage}
+          style={IconStyles}
+        />
+      )}
+      {popup_linked && (
+        <img
+          src={popupImg.toString()}
+          className={stx.CourseChipImage}
+          style={IconStyles}
+        />
+      )}
       <a href={url.toString()} className={stx.CCTitle}>
         {children || title}
       </a>
@@ -248,6 +291,13 @@ export const OptionActions = ({
   ToggleDeleteModal,
   OnActionSubmitForDuplicate,
   error,
+  dialoguePage,
+  CreateTestAction,
+  data,
+  WordCard,
+  DialogueGroup,
+  ToggleAttachments,
+  detachItems,
 }) => {
   return (
     <>
@@ -257,6 +307,44 @@ export const OptionActions = ({
           <h4 className={stx.DuplicationError}>
             Duplication failed, Data already exists
           </h4>
+        )}
+        {WordCard && (
+          <>
+            <ActionTest
+              title={"Attach Popup, Note or Label"}
+              icon={popupImg}
+              toggle={() => ToggleAttachments(data, 0)}
+            />
+            <ActionTest
+              title={"Detach Popup"}
+              icon={cross_cancel}
+              toggle={() => detachItems(1)}
+            />
+            <ActionTest
+              title={"Detach Note"}
+              icon={cross_cancel}
+              toggle={() => detachItems(0)}
+            />
+            <ActionTest
+              title={"Detach Label"}
+              icon={cross_cancel}
+              toggle={() => detachItems(2)}
+            />
+          </>
+        )}
+        {dialoguePage && (
+          <>
+            <ActionTest
+              title={"Ideogram Test"}
+              icon={testCard}
+              toggle={() => CreateTestAction(data, "ideogram")}
+            />
+            <ActionTest
+              title={"Pinyin Test"}
+              icon={testCard}
+              toggle={() => CreateTestAction(data, "pinyin")}
+            />
+          </>
         )}
         <Action title={"Edit"} icon={faPen} toggle={ToggleAddModal} />
         <Action
@@ -277,6 +365,15 @@ const Action = ({ title, icon, toggle }) => {
   return (
     <button className={stx.ActionButton} onClick={() => toggle()}>
       <FontAwesomeIcon icon={icon} className={stx.ActionIcon} />
+      <h4 className={stx.ActionTitle}>{title}</h4>
+    </button>
+  );
+};
+
+const ActionTest = ({ title, icon, toggle }) => {
+  return (
+    <button className={stx.ActionButton} onClick={() => toggle()}>
+      <img src={icon} className={stx.ActionIconImg} />
       <h4 className={stx.ActionTitle}>{title}</h4>
     </button>
   );

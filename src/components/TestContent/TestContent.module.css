@@ -1,0 +1,413 @@
+.DialogueContent {
+  width: 100%;
+  height: 100vh;
+  padding-bottom: 4em;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 4em;
+}
+.DialogueContent::-webkit-scrollbar {
+  display: none;
+}
+.MainWrapper {
+  width: 100%;
+  padding-bottom: 5em;
+  background-color: inherit;
+}
+.TopWrapper {
+  width: 100%;
+  height: 15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: inherit;
+}
+.TopH3 {
+  background-color: #ffffff;
+  padding: 1em 2em;
+  border-radius: 100px;
+  position: absolute;
+  left: 13%;
+  bottom: 25%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.TopH3:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+  background-color: #ffffffc2;
+}
+.TopH3Hidden {
+  background-color: #fff9da;
+  color: #fff9da;
+  padding: 1em 2em;
+  border-radius: 100px;
+  position: absolute;
+  left: 13%;
+
+  bottom: 25%;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.TopImageAvatar {
+  width: 10em;
+  height: 10em;
+  border-radius: 200px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.BottomWrapper {
+  margin-top: 1em;
+  margin-bottom: 3em;
+  background: #fff;
+  width: 100%;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  position: relative;
+  flex-direction: column;
+}
+.ImageOverlayDiv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff9da;
+  border-radius: 100px;
+}
+.SpeakingModule {
+  border: none;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.AudioPlayButton {
+  position: absolute;
+  top: -2em;
+  left: 2em;
+  border: 0px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #00000000;
+  border-radius: 100px;
+}
+.AudioPlayButton:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.SMImage {
+  width: 7em;
+  height: 5em;
+  object-fit: cover;
+  border-radius: 100px;
+  background-color: inherit;
+  background-color: inherit;
+}
+.BWHeading1 {
+  font-size: 30px;
+  background-color: inherit;
+  font-weight: normal;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.BWHeading1Hidden {
+  font-size: 30px;
+  cursor: pointer;
+  background-color: inherit;
+  color: #fff9da;
+  background: #fff9da;
+  font-weight: normal;
+  border-radius: 5px;
+}
+
+.IdeoGramAndPinyinDiv {
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+}
+.IdeoGramsWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  margin-top: 1.5em;
+  background-color: inherit;
+  position: relative;
+}
+.IdeoGramsWrapperLower {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  background-color: transparent;
+  margin-top: 0.5em;
+}
+.IdeoGramsWrapperLowerHidden {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff9da;
+  color: #fff9da;
+  margin-top: 0.5em;
+  border-radius: 5px;
+}
+.IdeoGrams {
+  width: fit-content;
+  background-color: inherit;
+  color: #000;
+  border-radius: 5px;
+  font-size: 70px;
+  margin: 0.05em;
+  margin-bottom: 0;
+  position: relative;
+  height: fit-content;
+  cursor: pointer;
+}
+.Paragraph {
+  background-color: inherit;
+  margin: 0;
+}
+.Pronounciations {
+  background-color: inherit;
+  color: #000;
+  font-size: 20px;
+  width: 75px;
+  height: fit-content;
+  border-radius: 5px;
+  margin: 0.1em;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+  position: relative;
+  justify-content: center;
+}
+
+.IdeoGramsDisabled {
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  color: #fff9da;
+  background: #fff9da;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 70px;
+  margin: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  user-select: none;
+  position: relative;
+}
+.Paragraph {
+  background-color: inherit;
+  color: inherit;
+}
+
+.PronounciationsDisabled {
+  width: 3em;
+  cursor: pointer;
+  color: #fff9da;
+  background: #fff9da;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 0.1em;
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-top: 0;
+  justify-content: center;
+}
+.BottomYellowDiv {
+  position: absolute;
+  background-color: #fed500;
+  bottom: 3em;
+  height: fit-content;
+  width: 100%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  z-index: 99999;
+  display: flex;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  align-items: center;
+  justify-content: stretch;
+  overflow-y: scroll;
+}
+
+.HideItemCompleteltDiv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fed500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  border-radius: inherit;
+  cursor: pointer;
+  z-index: 99;
+}
+.TestAnswer {
+  /* aspect-ratio: 1/1; */
+  padding: 0.7em;
+  height: 3em;
+  margin: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 25px;
+  cursor: pointer;
+  background-color: #fff;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  position: relative;
+}
+.TestAnswerParagraph {
+  color: #000;
+  background: inherit;
+  font-weight: bolder;
+}
+.TestAnswerCrossButton {
+  position: absolute;
+  top: -5px;
+  display: none;
+  left: -5px;
+  width: 2em;
+  height: 2em;
+  border: none;
+  margin: 0;
+  border-radius: 100px;
+  font-size: 10px;
+  background: #ffffff;
+  transition: 0.3s ease-in-out;
+  color: #ff3030;
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.TestAnswerCrossIcon {
+  background-color: inherit;
+  color: inherit;
+}
+.TestAnswerCrossButton:hover {
+  background: #ff3030;
+  transition: 0.3s ease-in-out;
+  color: #fff;
+}
+
+.TestAnswer:hover .TestAnswerCrossButton {
+  display: block;
+}
+.HoverQuestion {
+  position: absolute;
+  font-size: 20px;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  background-color: #fed500;
+  color: #000;
+  display: none;
+  z-index: 9999;
+  cursor: pointer;
+}
+.Wraper:hover .HoverQuestion {
+  display: flex;
+}
+.Wraper {
+  background-color: transparent;
+  position: relative;
+}
+.IndicateType {
+  position: absolute;
+  width: 25%;
+  height: 2em;
+  background: #fed500;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.HideThisStuff {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fff9da;
+}
+.HideThisStuffHint {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 100px;
+  background-color: #fff9da;
+}
+.SelectBtn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  top: -1em;
+  height: 2em;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.SelectBtn_active {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  top: -1em;
+  height: 2em;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}

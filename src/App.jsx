@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import HomePage from "./pages/HomePage/HomePage";
+import HomePage, { ExtractLocalDetails } from "./pages/HomePage/HomePage";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,41 +13,12 @@ import { useLocation } from "react-router-dom";
 import LessonPage from "./pages/LessonPage/LessonPage";
 import WordCardPage from "./pages/WordCardPage/WordCardPage";
 import AudioUploadPage from "./pages/AudioUploadPage/AudioUploadPage";
+import DialogueGroupPage from "./pages/DialogueGroupPage/DialogueGroupPage";
+import DialoguePage from "./pages/DialoguePage/DialoguePage";
+import TestPage from "./pages/TestPage/TestPage";
+import HanziWordPage from "./pages/HanziWordPage/HanziWordPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [token, SetToken] = useState(null);
-
-  const DetectIsLoggedIn = () => {
-    try {
-      var accessToken = localStorage.getItem("accessToken");
-      var refreshToken = localStorage.getItem("refreshToken");
-      if (accessToken == null) {
-        return false;
-      } else {
-        return true;
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  };
-  const RedirectToLoginPage = (currentLocation) => {
-    if (currentLocation !== "/login") {
-      window.location.href = "/login";
-    }
-  };
-  useEffect(() => {
-    const IsAuth = DetectIsLoggedIn();
-    var location = window.location.pathname;
-    if (!IsAuth) {
-      RedirectToLoginPage(location);
-      console.log(location);
-    }
-    return () => {
-      console.log("CleanUp");
-    };
-  }, []);
   return (
     <>
       <RouterProvider router={router} />
@@ -90,6 +61,15 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "hanzi/:hanziWord",
+    element: (
+      <>
+        <HanziWordPage />
+      </>
+    ),
+  },
+
+  {
     path: "course/:courseId/lesson/:lessonId/word-card/:wordCardId",
     element: (
       <>
@@ -98,6 +78,30 @@ const router = createBrowserRouter([
     ),
   },
 
+  {
+    path: "course/:courseId/lesson/:lessonId/dialogue-group/:dialogueGroupId",
+    element: (
+      <>
+        <DialogueGroupPage />
+      </>
+    ),
+  },
+  {
+    path: "course/:courseId/lesson/:lessonId/dialogue-group/:dialogueGroupId/dialogue/:dialogueId",
+    element: (
+      <>
+        <DialoguePage />
+      </>
+    ),
+  },
+  {
+    path: "course/:courseId/lesson/:lessonId/dialogue-group/:dialogueGroupId/dialogue-test/:dialogueTestId",
+    element: (
+      <>
+        <TestPage />
+      </>
+    ),
+  },
   {
     path: "audioUplaod",
     element: (

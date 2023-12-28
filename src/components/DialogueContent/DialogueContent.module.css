@@ -1,0 +1,150 @@
+.DialogueContent {
+  width: 100%;
+  height: 100vh;
+  padding-bottom: 4em;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 4em;
+  /* ['e',',','d' */
+}
+.DialogueContent::-webkit-scrollbar {
+  display: none;
+}
+.MainWrapper {
+  width: 100%;
+  /* height: fit-content; */
+  padding-bottom: 5em;
+  background-color: inherit;
+}
+.TopWrapper {
+  width: 100%;
+  height: 15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: inherit;
+}
+.TopH3 {
+  background-color: #ffffff;
+  padding: 1em 2em;
+  border-radius: 100px;
+  position: absolute;
+  left: 13%;
+  bottom: 35%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.TopImageAvatar {
+  width: 10em;
+  height: 10em;
+  border-radius: 200px;
+  object-fit: contain;
+}
+
+.BottomWrapper {
+  margin-top: 2em;
+  cursor: pointer;
+  background: #fff;
+  width: 100%;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  position: relative;
+  flex-direction: column;
+  margin-bottom: 3em;
+}
+
+.AudioPlayButton {
+  position: absolute;
+  top: -2em;
+  left: 2em;
+  border: 0px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #00000000;
+  border-radius: 100px;
+}
+.AudioPlayButton:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.SMImage {
+  width: 7em;
+  height: 5em;
+  object-fit: cover;
+  border-radius: 100px;
+  background-color: inherit;
+  background-color: inherit;
+}
+
+.BWHeading1 {
+  font-size: 30px;
+  background-color: inherit;
+  font-weight: normal;
+  text-align: center;
+}
+.IdeoGramAndPinyinDiv {
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+}
+.IdeoGramsWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  margin-top: 1.5em;
+  background-color: inherit;
+}
+.IdeoGramsWrapperLower {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  background-color: transparent;
+  margin-top: 0.5em;
+}
+.IdeoGrams {
+  width: fit-content;
+  background-color: inherit;
+  color: #000;
+  border-radius: 5px;
+  font-size: 70px;
+  margin: 0.05em;
+  margin-bottom: 0;
+}
+.Paragraph {
+  background-color: inherit;
+  margin: 0;
+}
+.Pronounciations {
+  background-color: inherit;
+  color: #000;
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 0;
+  justify-content: center;
+}
+.IdeoGramsPunctuation {
+  width: fit-content;
+  background: inherit;
+  color: #000;
+  font-size: 50px;
+}

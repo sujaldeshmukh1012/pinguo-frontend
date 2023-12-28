@@ -1,0 +1,145 @@
+.AttachmentWrapper {
+  width: 100%;
+  height: fit-content;
+  padding: 1em;
+  background-color: #fff;
+  padding-bottom: 2em;
+}
+.TopHorizontalScrollDiv {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  width: 100%;
+  /* height: 3em; */
+  background-color: #fff;
+}
+.ChipWrapper {
+  width: fit-content;
+  background-color: inherit;
+  border: 2px solid grey;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+  border-radius: 200px;
+  cursor: pointer;
+
+  color: grey;
+}
+.ChipWrapperActive {
+  width: fit-content;
+  background-color: #fed500;
+  border: 2px solid #fed500;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+  border-radius: 200px;
+  cursor: pointer;
+  color: #000;
+}
+.ContentDiv {
+  width: 100%;
+  height: fit-content;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5em;
+  display: flex;
+  background-color: inherit;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+.ContentCHipWrapper {
+  width: fit-content;
+  /* height: 3em; */
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: inherit;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.ContentLoadingChipWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background-color: inherit;
+}
+.ContentLoadingChiplarge {
+  width: 15em;
+  height: 2.5em;
+  background-color: grey;
+  border-radius: 100px;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+
+.ContentLoadingChipmedium {
+  width: 12em;
+  height: 2.5em;
+  background-color: grey;
+  border-radius: 100px;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+.ContentLoadingChipsmall {
+  width: 7em;
+  height: 2.5em;
+  background-color: grey;
+  border-radius: 100px;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+.ContentCHipWrapper {
+  width: fit-content;
+  /* height: 3em; */
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: inherit;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.ContentCHipWrapperSelected {
+  width: fit-content;
+
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fed500;
+  background-color: #fed500;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.AddAttachmentHeader {
+  width: 100%;
+  font-size: 20px;
+  background-color: inherit;
+  text-align: center;
+  margin-bottom: 1em;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5em;
+}
+.ConfirmButton {
+  width: 100%;
+  padding: 1em 0.5em;
+  border-radius: 100px;
+  border: 0px;
+  margin-top: 1em;
+  color: #000;
+  font-weight: bolder;
+  background-color: #fed500;
+  cursor: pointer;
+}

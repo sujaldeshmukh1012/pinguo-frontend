@@ -12,7 +12,7 @@ import {
   LoadingIndicator,
 } from "../HomePage/HomePage";
 import { BASEURL } from "../../connections/BASEURL";
-
+import wordCard from "../../assets/icons/svg/wordCard.svg";
 function WordCardPage() {
   const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(false);
@@ -55,7 +55,7 @@ function WordCardPage() {
       SetRefreshToken(data.refreshToken);
       FetchWordCardDetails(data.accessToken);
     } else {
-      window.location.href = "login";
+      window.location.href = "/login";
     }
   }, []);
 
@@ -63,6 +63,7 @@ function WordCardPage() {
     <div className={stx.WordCardPage}>
       <NavBar
         title={Loading ? "Loading..." : Error ? "An Error Occured" : NavTitle}
+        icon={wordCard}
       />
       <MobileSizeDiv>
         <div className={stx.WordCardWrapper}>
@@ -72,11 +73,18 @@ function WordCardPage() {
             <ErrorHandler Action={() => FetchWordCardDetails(AccessToken)} />
           ) : (
             WordCardDetails.map((item, i) => {
-              return <WordCard key={i} data={item} />;
+              return (
+                <WordCard
+                  key={i}
+                  data={item}
+                  AccessToken={AccessToken}
+                  AfterSuccessFunction={() => FetchWordCardDetails(AccessToken)}
+                />
+              );
             })
           )}
         </div>
-        <BottomSelect />
+        <BottomSelect allowedActions={["Lesson"]} ActionType={1} type={100} />
       </MobileSizeDiv>
     </div>
   );

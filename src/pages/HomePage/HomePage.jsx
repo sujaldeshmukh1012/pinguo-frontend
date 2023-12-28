@@ -4,10 +4,12 @@ import HomeContent from "../../components/HomeContent/HomeContent";
 import MobileSizeDiv from "../../components/MobileSizeDiv/MobileSizeDiv";
 import BottomSelect from "../../components/BottomSelect/BottomSelect";
 import stx from "./HomePage.module.css";
-import AddModal from "../../components/AddModal/AddModal";
 import { PuffLoader } from "react-spinners";
 import { BASEURL } from "../../connections/BASEURL";
-import { FetchCoursesOrLesson } from "../../connections/MainFetch";
+import {
+  FetchCoursesOrLesson,
+  PostOrPutData,
+} from "../../connections/MainFetch";
 
 function HomePage() {
   const [Loading, setLoading] = useState(false);
@@ -34,11 +36,13 @@ function HomePage() {
 
   useEffect(() => {
     var data = ExtractLocalDetails();
+    console.log(data);
     if (data.status === true) {
       SetUserId(data.userId);
       SetAccessToken(data.accessToken);
       SetRefreshToken(data.refreshToken);
       FetchCourses(data.accessToken);
+      console.log(data.accessToken);
     } else {
       window.location.href = "login";
     }
@@ -46,7 +50,7 @@ function HomePage() {
 
   return (
     <div className={stx.HomePage}>
-      <NavBar home title={"COURSES"} />
+      <NavBar home title={"COURSES"} icon={null} />
       <MobileSizeDiv>
         <HomeContent
           CourseList={CourseList}
@@ -57,6 +61,7 @@ function HomePage() {
           error={Error}
         />
         <BottomSelect
+          allowedActions={["Course"]}
           home
           AfterSuccessFunction={FetchCourses}
           ActionType={1}
@@ -86,33 +91,80 @@ export const LoadingIndicator = () => {
 };
 
 export const ErrorHandler = ({ Action }) => {
+  const [refreshToken, SetRefreshToken] = useState(null);
+  const GetRefreshToken = async () => {
+    var token = localStorage.getItem("refreshToken");
+    if (token !== null) {
+      SetRefreshToken(token);
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    GetRefreshToken();
+  }, []);
+  const FunctionAction = async () => {
+    var body = JSON.stringify({ refresh: refreshToken });
+    var method = "POST";
+    var url = BASEURL + "api/token/refresh/";
+    const resp = await PostOrPutData(body, url, null, method);
+    if (resp.status) {
+      SetTokenToStorage(resp.data.access);
+      window.location.reload();
+    }
+    Action();
+  };
   return (
     <div className={stx.ErrorHandler}>
       <h3 className={stx.ErrorHandlerH3}>Please Try Again</h3>
       <p className={stx.ErrorHandlerPara}>An Error Occured</p>
-      <button className={stx.ErrorHandlerTryAgainBtn} onClick={() => Action()}>
+      <BlackButton
+        className={stx.ErrorHandlerTryAgainBtn}
+        FunctionAction={FunctionAction}
+      >
         Try again
-      </button>
+      </BlackButton>
     </div>
   );
 };
-
+export const BlackButton = ({ FunctionAction, children }) => {
+  return (
+    <button
+      className={stx.ErrorHandlerTryAgainBtn}
+      onClick={() => FunctionAction()}
+    >
+      {children}
+    </button>
+  );
+};
 export const ExtractLocalDetails = () => {
-  try {
-    var userId = localStorage.getItem("userId");
-    var userName = localStorage.getItem("userName");
-    var refreshToken = localStorage.getItem("refreshToken");
-    var accessToken = localStorage.getItem("accessToken");
-    var resp = {
-      status: true,
-      userId: userId,
-      userName: userName,
-      refreshToken: refreshToken,
-      accessToken: accessToken,
-    };
-    return resp;
-  } catch (error) {
-    console.log(error);
-    return { status: false };
-  }
+  var userId = localStorage.getItem("userId");
+  var userName = localStorage.getItem("userName");
+  var refreshToken = localStorage.getItem("refreshToken");
+  var accessToken = localStorage.getItem("accessToken");
+  var resp = {
+    status: !!accessToken,
+    userId: userId,
+    userName: userName,
+    refreshToken: refreshToken,
+    accessToken: accessToken,
+  };
+  return resp;
+};
+
+export const SetTokenToStorage = (accessToken) => {
+  localStorage.setItem("accessToken", accessToken);
+  var accessToken = localStorage.getItem("accessToken");
+  var resp = {
+    status: !!accessToken,
+    accessToken: accessToken,
+  };
+  return resp;
+};
+
+export const Logout = () => {
+  localStorage.removeItem("accessToken");
+  window.location.reload();
 };

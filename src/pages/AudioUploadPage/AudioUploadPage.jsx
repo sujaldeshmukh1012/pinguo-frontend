@@ -45,7 +45,10 @@ const BulkUplaod = ({ AccessToken }) => {
   const [index, SetIndex] = useState(0);
   const FetchWords = (index) => {
     var url = BASEURL + "word-list/" + index + "/";
-    fetch(url, { headers: { Authorization: "Bearer " + AccessToken } })
+    fetch(url, {
+      headers: { Authorization: "Bearer " + AccessToken },
+      // referrerPolicy: "unsafe-url",
+    })
       .then((r) => r.json())
       .then((resp) => {
         console.log(resp);

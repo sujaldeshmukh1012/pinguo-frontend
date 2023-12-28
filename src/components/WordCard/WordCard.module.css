@@ -14,6 +14,8 @@
   text-align: right;
   background-color: inherit;
   color: grey;
+  padding: 1em;
+  cursor: pointer;
 }
 .WordMeaning {
   margin: 0;
@@ -58,6 +60,23 @@
   color: #000;
   border-radius: 5px;
   overflow: hidden;
+  text-decoration: none;
+  font-size: 80px;
+  margin: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.IdeoGrams_red {
+  width: 1.5em;
+  /* height: 5em; */
+  aspect-ratio: 1/1;
+  background-color: #f3f3f3;
+  color: red;
+  border-radius: 5px;
+  overflow: hidden;
+  text-decoration: none;
   font-size: 80px;
   margin: 0.05em;
   display: flex;
@@ -116,4 +135,7 @@
   color: #fff;
   background: #d2d2d2;
   border: none;
+}
+.MAkeItRed {
+  color: red !important;
 }

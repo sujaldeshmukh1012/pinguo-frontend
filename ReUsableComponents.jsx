@@ -11,17 +11,30 @@ function MainPageSkeleton({
   AccessToken,
   NavTitle,
   Parent_Lesson,
+  NavIcon,
+  Parent_DialogueGroup,
+  Parent_Dialogue,
+  TestCardId,
+  TestCardPage,
+  Parent_Dialogue_data,
+  allowedActions,
 }) {
   return (
     <div className={stx.MainPageSkeleton}>
-      <NavBar title={NavTitle} />
+      <NavBar title={NavTitle} icon={NavIcon} />
       <MobileSizeDiv>
         {children}
         <BottomSelect
+          TestCardPage={TestCardPage}
+          TestCardId={TestCardId}
+          allowedActions={allowedActions}
           AfterSuccessFunction={FetchFunction}
           Parent_Lesson={Parent_Lesson}
           AccessToken={AccessToken}
           UserId={UserId}
+          Parent_DialogueGroup={Parent_DialogueGroup}
+          Parent_Dialogue={Parent_Dialogue}
+          Parent_Dialogue_data={Parent_Dialogue_data}
         />
       </MobileSizeDiv>
     </div>
@@ -31,6 +44,7 @@ export default MainPageSkeleton;
 const PostData = async (body, url, AccessToken, userId, method) => {
   const resp = await fetch(url, {
     method: method,
+    // referrerPolicy: "unsafe-url",
     headers: {
       Authorization: "Bearer " + AccessToken,
       "Content-Type": "application/json",
@@ -49,6 +63,7 @@ const PostData = async (body, url, AccessToken, userId, method) => {
 const FetchCoursesOrLesson = async (token, url) => {
   const response = await fetch(url, {
     headers: { Authorization: "Bearer " + token },
+    // referrerPolicy: "unsafe-url",
   });
   const isSuccessful = response.ok;
   if (isSuccessful) {

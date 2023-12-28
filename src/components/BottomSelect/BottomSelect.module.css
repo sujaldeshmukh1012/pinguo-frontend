@@ -1,9 +1,9 @@
 .BottomSelect {
-  width: 100%;
+  width: 450px;
   height: 3.5em;
   background-color: black;
   position: absolute;
-  z-index: 998;
+  z-index: 999;
   bottom: 0;
   right: 0;
   display: flex;
@@ -40,14 +40,15 @@
   background-color: aqua;
 }
 .MainModalWrapper {
-  width: 100%;
-  position: absolute;
+  width: 450px;
+  position: fixed;
   top: 0;
   bottom: 0;
   background-color: #00000000;
   height: calc(100vh - 3.5em);
   z-index: 998;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 .QuitModalOverlay {
@@ -63,15 +64,14 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 100%;
+  width: 450px;
   z-index: 998;
   position: absolute;
   bottom: 0;
   max-height: 70vh;
   height: fit-content;
   background-color: #fff;
-
-  padding: 1em 0em 0 0;
+  padding: 1em 0em 0.5em 0;
   overflow: scroll;
   /* transition: 0.3s ease-in-out; */
 }
