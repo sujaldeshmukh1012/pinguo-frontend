@@ -1,4 +1,4 @@
-````markdown
+
 # 🐧 Pinguo Dashboard
 
 Welcome to the **Pinguo Dashboard**, a backend web application for teachers on the Pinguo platform. This tool is built to efficiently manage, create, and review Chinese language learning content—including tests, exercises, and student data.
