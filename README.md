@@ -1,7 +1,3 @@
-Here’s a comprehensive `README.md` tailored for your Pinguo backend dashboard project:
-
----
-
 ````markdown
 # 🐧 Pinguo Dashboard
 
