@@ -263,9 +263,13 @@ export const ContentChip = ({
           style={IconStyles}
         />
       )}
-      <a href={url.toString()} className={stx.CCTitle}>
-        {children || title}
-      </a>
+      {url !== false ? (
+        <a href={url.toString()} className={stx.CCTitle}>
+          {children || title}
+        </a>
+      ) : (
+        <p className={stx.CCTitle}>{children || title}</p>
+      )}
       <button className={stx.CCButton} onClick={() => ToggleModal(data)}>
         <FontAwesomeIcon icon={faEllipsisV} className={stx.CCIcon} />
       </button>

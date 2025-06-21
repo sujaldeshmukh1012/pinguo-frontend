@@ -56,6 +56,7 @@ function AddModal({
   const [PopupAddCard, SetPopupAddCard] = useState(false);
   const [BalloonUpdate, SetBalloonUpdate] = useState(false);
   const [LabelAddCard, SetLabelAddCard] = useState(false);
+  const [AlertEditing, SetAlertEditing] = useState(false);
   const [ShowToast, SetShowToast] = useState(false);
   const [ToastInfo, SetToastInfo] = useState("");
   const [ToastType, SetToastType] = useState(null);
@@ -76,20 +77,26 @@ function AddModal({
     } else {
       SetBaloonVoiceCard(false);
     }
-    if (type === 13) {
+    if (type === 13 || data?.info_type == "note") {
+      SetAlertEditing(true);
       SetNoteAddCard(true);
     } else {
+      SetAlertEditing(true);
       SetNoteAddCard(false);
     }
-    if (type === 14) {
+    if (type === 14 || data?.info_type == "popup") {
       SetPopupAddCard(true);
+      SetAlertEditing(true);
     } else {
       SetPopupAddCard(false);
+      SetAlertEditing(true);
     }
 
-    if (type === 15) {
+    if (type === 15 || data?.info_type == "label") {
+      SetAlertEditing(true);
       SetLabelAddCard(true);
     } else {
+      SetAlertEditing(true);
       SetLabelAddCard(false);
     }
     if (type === 20) {
@@ -329,6 +336,8 @@ function AddModal({
           />
         ) : NoteAddCard ? (
           <NoteAddSection
+            data={data}
+            AlertEditing={AlertEditing}
             toggle={toggle}
             AfterSuccessFunction={AfterSuccessFunction}
             type={type}
@@ -342,6 +351,8 @@ function AddModal({
           />
         ) : PopupAddCard ? (
           <PopupAddSection
+            data={data}
+            AlertEditing={AlertEditing}
             toggle={toggle}
             AfterSuccessFunction={AfterSuccessFunction}
             type={type}
@@ -355,6 +366,8 @@ function AddModal({
           />
         ) : LabelAddCard ? (
           <LabelAddSection
+            data={data}
+            AlertEditing={AlertEditing}
             toggle={toggle}
             AfterSuccessFunction={AfterSuccessFunction}
             type={type}
@@ -625,7 +638,7 @@ const ImageUploadFeature = ({
             className={stx.ImgUplInputsMuted}
             placeholder="Uploaded File Name will appear here"
             value={FileName || ""}
-            disabled={true}
+            disabled={false}
             onChange={(e) => {
               SetFileName(e.target.value);
             }}
@@ -673,7 +686,7 @@ const BalloonUploadFeature = ({
     SetUploadingError(false);
     var body = new FormData();
     if (File) {
-      body.append("file", File, FileName);
+      body.append("file", File);
     }
     body.append("avatar", Avatar);
     body.append("meaning", Meaning);
@@ -808,7 +821,7 @@ const BalloonUploadFeature = ({
               onClick={() => SubmitData()}
               disabled={File === null ? true : false}
             >
-              SAVE
+              {File === null ? "Add Image" : "SAVE"}
             </button>
           </div>
         </>
@@ -942,17 +955,26 @@ const NoteAddSection = ({
   Parent_Dialogue,
   Parent_Lesson,
   item_id,
+  data,
+  AlertEditing,
   Parent_Dialogue_data,
 }) => {
-  const [File, SetFile] = useState(null);
-  const [FileName, SetFileName] = useState(null);
-  const [NoteTitle, SetNoteTitle] = useState(null);
-  const [NoteSubTitle, SetNoteSubTitle] = useState(null);
-  const [NoteText, SetNoteText] = useState(null);
+  const [File, SetFile] = useState(data?.file || null);
+  const [FileName, SetFileName] = useState(data?.file || null);
+  const [NoteTitle, SetNoteTitle] = useState(data?.title || null);
+  const [NoteSubTitle, SetNoteSubTitle] = useState(data?.subtitle || null);
+  const [NoteText, SetNoteText] = useState(data?.text || null);
   const [uplaoding, SetUploading] = useState(false);
   const [uplaodingError, SetUploadingError] = useState(false);
   const [DialogueUpdating, SetDialogueUpdating] = useState(false);
   const SubmitData = () => {
+    if (AlertEditing) {
+      UpdateData();
+    } else {
+      PostData();
+    }
+  };
+  const PostData = () => {
     SetUploading(true);
     SetUploadingError(false);
     var body = new FormData();
@@ -984,11 +1006,48 @@ const NoteAddSection = ({
         SetUploadingError(true);
       });
   };
+  const UpdateData = () => {
+    SetUploading(true);
+    SetUploadingError(false);
+    var body = new FormData();
+    console.log(File);
+    console.log(FileName);
+    if (File !== data?.file && File !== null) {
+      body.append("file", File, FileName);
+    }
+    body.append("title", NoteTitle);
+    body.append("subtitle", NoteSubTitle);
+    body.append("text", NoteText);
+    body.append("lesson", Parent_Lesson);
+    body.append("user", UserId);
+    var url = BASEURL + "alert-notes-action/" + data?.id + "/";
+    axios
+      .put(url, body, {
+        headers: {
+          Authorization: "Bearer " + AccessToken,
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((resp) => {
+        console.log(resp);
+        SetUploading(false);
+        AfterSuccessFunction(AccessToken, Parent_Lesson);
+        toggle();
+      })
+      .catch((e) => {
+        SetUploading(false);
+        SetUploadingError(true);
+      });
+  };
 
   const GetAudioFile = (file) => {
     SetFile(file);
     SetFileName(file?.name);
   };
+  useEffect(() => {
+    console.log(data);
+    console.log(AlertEditing);
+  }, []);
 
   return (
     <div className={stx.BalloonUploadFeature}>
@@ -1148,16 +1207,25 @@ const PopupAddSection = ({
   Parent_Dialogue,
   Parent_Lesson,
   item_id,
+  data,
+  AlertEditing,
   Parent_Dialogue_data,
 }) => {
-  const [File, SetFile] = useState(null);
-  const [FileName, SetFileName] = useState(null);
-  const [NoteTitle, SetNoteTitle] = useState(null);
-  const [NoteText, SetNoteText] = useState(null);
+  const [File, SetFile] = useState(data?.file || null);
+  const [FileName, SetFileName] = useState(data?.file || null);
+  const [NoteTitle, SetNoteTitle] = useState(data?.title || null);
+  const [NoteText, SetNoteText] = useState(data?.text || null);
   const [uplaoding, SetUploading] = useState(false);
   const [uplaodingError, SetUploadingError] = useState(false);
   const [DialogueUpdating, SetDialogueUpdating] = useState(false);
   const SubmitData = () => {
+    if (AlertEditing) {
+      UpdateData();
+    } else {
+      PostData();
+    }
+  };
+  const PostData = () => {
     SetUploading(true);
     SetUploadingError(false);
     var body = new FormData();
@@ -1187,7 +1255,38 @@ const PopupAddSection = ({
         SetUploadingError(true);
       });
   };
-
+  const UpdateData = () => {
+    SetUploading(true);
+    SetUploadingError(false);
+    var body = new FormData();
+    console.log(File);
+    console.log(FileName);
+    if (File !== data?.file && File !== null) {
+      body.append("file", File, FileName);
+    }
+    body.append("title", NoteTitle);
+    body.append("text", NoteText);
+    body.append("lesson", Parent_Lesson);
+    body.append("user", UserId);
+    var url = BASEURL + "alert-popups-action/" + data?.id + "/";
+    axios
+      .put(url, body, {
+        headers: {
+          Authorization: "Bearer " + AccessToken,
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((resp) => {
+        console.log(resp);
+        SetUploading(false);
+        AfterSuccessFunction(AccessToken, Parent_Lesson);
+        toggle();
+      })
+      .catch((e) => {
+        SetUploading(false);
+        SetUploadingError(true);
+      });
+  };
   const GetAudioFile = (file) => {
     SetFile(file);
     SetFileName(file?.name);
@@ -1285,13 +1384,21 @@ const LabelAddSection = ({
   Parent_Lesson,
   item_id,
   Parent_Dialogue_data,
+  data,
+  AlertEditing,
 }) => {
-  const [File, SetFile] = useState(null);
-  const [LabelTitle, SetLabelTitle] = useState(null);
+  const [LabelTitle, SetLabelTitle] = useState(data?.title || null);
   const [uplaoding, SetUploading] = useState(false);
   const [uplaodingError, SetUploadingError] = useState(false);
   const [DialogueUpdating, SetDialogueUpdating] = useState(false);
   const SubmitData = () => {
+    if (AlertEditing) {
+      UpdateData();
+    } else {
+      PostData();
+    }
+  };
+  const PostData = () => {
     SetUploading(true);
     SetUploadingError(false);
     var body = new FormData();
@@ -1312,6 +1419,33 @@ const LabelAddSection = ({
         AfterSuccessFunction(AccessToken, Parent_Lesson);
         toggle();
         // UpdateDialogue(resp.data);
+      })
+      .catch((e) => {
+        SetUploading(false);
+        SetUploadingError(true);
+      });
+  };
+
+  const UpdateData = () => {
+    SetUploading(true);
+    SetUploadingError(false);
+    var body = new FormData();
+    body.append("title", LabelTitle);
+    body.append("lesson", Parent_Lesson);
+    body.append("user", UserId);
+    var url = BASEURL + "alert-labels-action/" + data?.id + "/";
+    axios
+      .put(url, body, {
+        headers: {
+          Authorization: "Bearer " + AccessToken,
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((resp) => {
+        console.log(resp);
+        SetUploading(false);
+        AfterSuccessFunction(AccessToken, Parent_Lesson);
+        toggle();
       })
       .catch((e) => {
         SetUploading(false);

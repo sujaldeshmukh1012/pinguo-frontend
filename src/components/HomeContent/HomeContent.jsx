@@ -62,7 +62,7 @@ function HomeContent({
       method: "POST",
       headers: {
         Authorization: "Bearer " + AccessToken,
-        "Content-Type": "application/json",SelectedCourse
+        "Content-Type": "application/json",
       },
       // referrerPolicy: "unsafe-url",
       body: JSON.stringify({

@@ -121,17 +121,31 @@ function DialogueGroupContent({
   };
   const OnActionSubmitForDuplicate = async () => {
     SetDuplicationError(false);
-    var url = BASEURL + "dialogue-actions/" + 0 + "/";
-    var method = "POST";
-    var body = {
-      title: SelectedCards.title,
-      user: UserId,
-      lesson: Parent_Lesson,
-      dialogue_group: Parent_DialogueGroup,
-    };
-    var resp = await MainFetchFunction(AccessToken, url, method, body);
-    AfterSuccessFunction(AccessToken, Parent_Lesson);
-    ToggleModal();
+    if (SelectedCards.info_type === "dialogue") {
+      var url = BASEURL + "dialogue-duplication/" + SelectedCards?.id + "/";
+      var method = "POST";
+      var body = {
+        title: SelectedCards.title,
+        user: UserId,
+        lesson: Parent_Lesson,
+        dialogue_group: Parent_DialogueGroup,
+      };
+      var resp = await MainFetchFunction(AccessToken, url, method, body);
+      AfterSuccessFunction(AccessToken, Parent_Lesson);
+      ToggleModal();
+    } else {
+      var url = BASEURL + "testcard-duplication/" + SelectedCards?.id + "/";
+      var method = "POST";
+      var body = {
+        title: SelectedCards.title,
+        user: UserId,
+        lesson: Parent_Lesson,
+        dialogue_group: Parent_DialogueGroup,
+      };
+      var resp = await MainFetchFunction(AccessToken, url, method, body);
+      AfterSuccessFunction(AccessToken, Parent_Lesson);
+      ToggleModal();
+    }
   };
   const DeleteAction = async () => {
     SetDuplicationError(false);
@@ -179,7 +193,7 @@ function DialogueGroupContent({
                       return (
                         <Draggable
                           key={item.id}
-                          draggableId={item.id.toString()}
+                          draggableId={item?.id?.toString()}
                           index={index}
                         >
                           {(provided) => (
@@ -194,6 +208,7 @@ function DialogueGroupContent({
                         </Draggable>
                       );
                     } else {
+                      console.log(item);
                       return (
                         <Draggable
                           key={item.id}

@@ -30,7 +30,7 @@ const ReduceData = (data) => {
   var new_d = [];
   data.map((item, i) => {
     var js = {};
-    js["id"] = item.id;
+    js["item_id"] = item.item_id;
     js["info_type"] = item.info_type;
     new_d.push(js);
   });

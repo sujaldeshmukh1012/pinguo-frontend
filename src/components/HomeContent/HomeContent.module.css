@@ -68,10 +68,11 @@
 }
 .CCButton {
   border-radius: 100px;
-  /* transition: 0.3s ease-in-out; */
-
   border: none;
   cursor: pointer;
+  height: 4em;
+  width: 10%;
+  background-color: inherit;
 }
 
 .CCIcon {

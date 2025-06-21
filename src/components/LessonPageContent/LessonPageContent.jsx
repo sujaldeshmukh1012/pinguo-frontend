@@ -70,7 +70,6 @@ function LessonPageContent({
     SetForAttachments(data);
     SetModalOpen(false);
   };
-
   const detachItems = (type) => {
     const body = removeAttachmentsbody(SelectedCards, type);
     const url = BASEURL + "wordcard-update/" + SelectedCards?.id + "/";
@@ -103,6 +102,7 @@ function LessonPageContent({
       items
     );
   };
+
   const ToggleModal = (data, text) => {
     SetModalOpen(!modalOpen);
     SetSelectedCards(data);
@@ -182,6 +182,51 @@ function LessonPageContent({
     setDeleteModal(false);
     SetModalOpen(false);
   };
+  const DeleteActionAlerts = async (url) => {
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + AccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        lesson: Parent_Lesson,
+      }),
+    });
+    AfterSuccessFunction(AccessToken, Parent_Lesson);
+    setDeleteModal(false);
+    SetModalOpen(false);
+  };
+
+  const DeleteActionFxn = async (Card) => {
+    console.log(Card.info_type);
+    switch (Card.info_type) {
+      case "word_card":
+        DeleteActionWordCard();
+        break;
+      case "dialogue_group":
+        DeleteActionDialoguieGroups();
+        break;
+
+      case "note":
+        var url = BASEURL + "alert-notes-action/" + SelectedCards.id + "/";
+        DeleteActionAlerts(url);
+        break;
+
+      case "popup":
+        var url = BASEURL + "alert-popups-action/" + SelectedCards.id + "/";
+        DeleteActionAlerts(url);
+        console.log("Deleting Popup");
+        break;
+
+      case "label":
+        var url = BASEURL + "alert-labels-action/" + SelectedCards.id + "/";
+        DeleteActionAlerts(url);
+        console.log("Deleting Label");
+        break;
+    }
+  };
+
   return (
     <div className={stx.LessonPageContent}>
       {loading ? (
@@ -372,11 +417,7 @@ function LessonPageContent({
         <ElevatedModal toggle={CloseDeleteModal}>
           <CourseDeleteMatter
             close={ToggleDeleteModal}
-            DeleteAction={
-              SelectedCards.word === undefined
-                ? DeleteActionDialoguieGroups
-                : DeleteActionWordCard
-            }
+            DeleteAction={() => DeleteActionFxn(SelectedCards)}
             SelectedCourse={SelectedCards}
           />
         </ElevatedModal>
@@ -489,7 +530,7 @@ const NoteChip = ({ provided, Parent_Lesson, item, ToggleModal, index }) => {
       <ContentChip
         iconImage={NoteImg}
         IconStyles={{ width: 20 }}
-        url={Parent_Lesson + "/word-card/" + item?.id}
+        url={false}
         children={
           <p
             style={{
@@ -520,7 +561,7 @@ const PopupChip = ({ provided, Parent_Lesson, item, ToggleModal, index }) => {
       <ContentChip
         iconImage={popupImg}
         IconStyles={{ width: 20 }}
-        url={Parent_Lesson + "/word-card/" + item?.id}
+        url={false}
         children={
           <p
             style={{
@@ -551,7 +592,7 @@ const LabelChip = ({ provided, Parent_Lesson, item, ToggleModal, index }) => {
       <ContentChip
         iconImage={labelImg}
         IconStyles={{ width: 20 }}
-        url={Parent_Lesson + "/word-card/" + item?.id}
+        url={false}
         children={
           <p
             style={{
